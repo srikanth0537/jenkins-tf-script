@@ -6,9 +6,10 @@ provider "aws" {
 resource "aws_instance" "example" {
   ami           = var.ami_id
   instance_type = var.instance_type
+  count = 2
 
   tags = {
-    Name = "server-from-jenkinsfile"
+    Name = format("VM_%d", count.index)
   }
 
 }
