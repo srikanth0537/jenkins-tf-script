@@ -9,5 +9,5 @@ variable "instance_type" {
 }
 
 variable "ami_id" {
-  default = "ami-07d3a50bd29811cd1"
+  default = "ami-02eb7a4783e7e9317"
 }
