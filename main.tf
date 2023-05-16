@@ -9,6 +9,8 @@ terraform {
 
 provider "aws" {
   region = var.region
+  AWS_ACCESS_KEY_ID = "AKIAYTTWTVBTZOYIGC64"
+  AWS_SECRET_ACCESS_KEY = "iPecpg7ErIidEz/J/4Cj549mScGLhZVUTkPXKph5"
 }
 
 resource "aws_instance" "example" {
