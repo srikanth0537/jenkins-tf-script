@@ -12,15 +12,10 @@ pipeline {
             } 
         }
 
-        stage('Terraform init') {
+        stage('commands') {
             steps {
-                sh 'terraform init'
-            }
-        }
-
-        stage('Terraform Apply') {
-            steps {
-                sh 'terraform apply --auto-approve'
+                sh 'aws s3 ls'
+                sh 'aws ec2 describe-instances'
             }
         }
         
