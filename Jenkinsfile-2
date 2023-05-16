@@ -1,0 +1,17 @@
+pipeline {
+  agent any
+
+  stages {
+    stage('Get EC2 Instances') {
+      steps {
+        withCredentials([
+          credentialsId: 'aws-credentials',
+          usernameVariable: 'AWS_ACCESS_KEY_ID',
+          passwordVariable: 'AWS_SECRET_ACCESS_KEY'
+        ]) {
+          sh 'aws ec2 describe-instances'
+        }
+      }
+    }
+  }
+}
