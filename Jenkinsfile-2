@@ -19,6 +19,7 @@ pipeline {
             
             # Get list of instances
             aws ec2 describe-instances
+          '''
         }
       }
     }
