@@ -11,11 +11,20 @@ pipeline {
                 checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/srikanth0537/jenkins-tf-script.git']])  
             } 
         }
-
-        stage('commands') {
+        
+        stage('Terraform env variables') {
             steps {
-                sh 'aws s3 ls'
-                sh 'aws ec2 describe-instances'
+                withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: "jenkins_tf_pipeline_job",
+                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                ]]) {
+                    sh "export TF_VAR_AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID && export TF_VAR_AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY"
+                    sh 'aws ec2 describe-instances'
+                    sh 'aws s3 ls'
+
+                }
             }
         }
         
