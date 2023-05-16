@@ -1,15 +1,24 @@
 pipeline {
   agent any
+  
+  environment {
+    AWS_DEFAULT_REGION = 'ap-south-1'
+    AWS_ACCESS_KEY_ID = 'AKIAYTTWTVBTZOYIGC64'
+    AWS_SECRET_ACCESS_KEY = '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'
+  }
 
   stages {
     stage('Get EC2 Instances') {
       steps {
-        withCredentials([
-          credentialsId: 'aws-credentials',
-          usernameVariable: 'AWS_ACCESS_KEY_ID',
-          passwordVariable: 'AWS_SECRET_ACCESS_KEY'
-        ]) {
-          sh 'aws ec2 describe-instances --region ap-south-1'
+        script {
+          sh '''
+            # Set AWS credentials
+            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            export AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
+            
+            # Get list of instances
+            aws ec2 describe-instances
         }
       }
     }
