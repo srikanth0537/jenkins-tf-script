@@ -13,12 +13,21 @@ provider "aws" {
   AWS_SECRET_ACCESS_KEY = "iPecpg7ErIidEz/J/4Cj549mScGLhZVUTkPXKph5"
 }
 
-resource "aws_instance" "example" {
-  ami           = var.ami_id
-  instance_type = var.instance_type
+# resource "aws_instance" "example" {
+#   ami           = var.ami_id
+#   instance_type = var.instance_type
+
+#   tags = {
+#     Name = "sample-web-server"
+#   }
+
+# }
+
+resource "aws_vpc" "main" {
+  cidr_block       = "10.0.0.0/16"
+  instance_tenancy = "default"
 
   tags = {
-    Name = "sample-web-server"
+    Name = "Srikanth"
   }
-
 }
