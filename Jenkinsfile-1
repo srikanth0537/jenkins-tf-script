@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    tools {
+        terraform 'terraform-jenkins'
+    }
+
+    stages {
+        stage('Git checkout') {
+            steps {
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/srikanth0537/jenkins-tf-script.git']])  
+            } 
+        }
+
+        stage('Terraform init') {
+            steps {
+                sh 'terraform init'
+            }
+        }
+
+        stage('Terraform Apply') {
+            steps {
+                sh 'terraform apply --auto-approve'
+            }
+        }
+        
+    }
+
+}
