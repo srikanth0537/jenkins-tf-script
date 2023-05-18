@@ -25,6 +25,7 @@ pipeline {
       steps {
         sh 'aws ec2 describe-vpcs'
 	sh 'aws ec2 describe-instances'
+	sh 'aws s3 ls'
       }
     }
   }
