@@ -21,11 +21,9 @@ pipeline {
       }
     }
     
-    stage ('terraform init') {
+    stage ('commands') {
       steps {
-        sh 'terraform init'
-        sh 'terraform validate'
-        sh 'terraform fmt'
+        sh 'aws ec2 describe-vpcs'
       }
     }
   }
