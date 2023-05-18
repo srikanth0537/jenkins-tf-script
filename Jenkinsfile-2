@@ -23,8 +23,8 @@ pipeline {
     
     stage ('commands') {
       steps {
-	sh 'aws ec2 describe-instances'
 	sh 'aws s3 ls'
+	echo 'This is srikanth'
       }
     }
   }
